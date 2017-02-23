@@ -1,6 +1,6 @@
-from django.conf.urls import url
-from .views import index
+from django.conf.urls import url, include
+from . import views
 
-urlpattern = (
-    url(r'^'),
-)
+urlpatterns = [
+    url(r'^', views.index),
+]

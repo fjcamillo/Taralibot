@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.views.decrators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.http import HttpResponse
 import requests
+from pprint import pprint
 import json
 import os
 import time
