@@ -27,8 +27,12 @@ class index(generic.View):
 
     def post(self, request, *args, **kwargs):
         incoming_message = json.loads(self.request.body.decode('utf-8'))
+        pprint("\n=============INITIAL JSON RETURN================")
+        pprint(incoming_message)
+        pprint("\n=============INITIAL JSON RETURN================")
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
+                persistent_menu(message['sender']['id'])
                 post_facebook_messages(message['sender']['id'], message['message']['text'])
         return HttpResponse()
 
@@ -37,7 +41,33 @@ def post_facebook_messages(fbid, received_messages):
     response_msg = json.dumps({"recipient": {"id":fbid},"message":{"text":received_messages}})
     print('-----')
     print(response_msg)
-
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+    pprint(status.json())
+    return
+
+def persistent_menu(fbid):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+page_access_token
+    persistent = json.dumps({
+        "setting_type" : "call_to_actions",
+        "thread_state" : "existing_thread",
+        "call_to_actions":[
+            {
+                "type":"postback",
+                "title":"Help",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
+            },
+            {
+                "type":"postback",
+                "title":"Start a New Order",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+            },
+        {
+            "type":"web_url",
+            "title":"View Website",
+            "url":"http://petersapparel.parseapp.com/"
+        }],
+        "recipient": fbid
+    })
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=persistent)
     pprint(status.json())
     return
