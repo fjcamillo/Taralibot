@@ -8,6 +8,7 @@ from pprint import pprint
 import json
 import os
 import time
+from . import replierfunc
 
 verify_token = '5244680129'
 
@@ -60,14 +61,13 @@ def persistent_menu(fbid):
                 "type":"postback",
                 "title":"Start a New Order",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
-            },
-        {
-            "type":"web_url",
-            "title":"View Website",
-            "url":"http://petersapparel.parseapp.com/"
-        }],
+            }
+        ],
         "recipient": fbid
     })
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=persistent)
     pprint(status.json())
     return
+
+def receive_postback(fbid):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
