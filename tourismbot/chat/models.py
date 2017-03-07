@@ -22,3 +22,4 @@ class chatusers(models.Model):
 class conversations(models.Model):
     facebook_fk = models.ForeignKey(chatusers, on_delete=models.CASCADE)
     converse = models.CharField(max_length=320)
+    timestamp = models.DateTimeField(auto_now=True)
