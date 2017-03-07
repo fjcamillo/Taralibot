@@ -9,6 +9,7 @@ import json
 import os
 import time
 from . import replierfunc
+from . import persistentmenus
 
 verify_token = '5244680129'
 
@@ -44,29 +45,6 @@ def post_facebook_messages(fbid, received_messages):
     print('-----')
     print(response_msg)
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
-    pprint(status.json())
-    return
-
-def persistent_menu(fbid):
-    post_message_url = 'https://graph.facebook.com/v2.6/me/thread_settings?access_token='+page_access_token
-    persistent = json.dumps({
-        "setting_type" : "call_to_actions",
-        "thread_state" : "existing_thread",
-        "call_to_actions":[
-            {
-                "type":"postback",
-                "title":"Help",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
-            },
-            {
-                "type":"postback",
-                "title":"Start a New Order",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
-            }
-        ],
-        "recipient": fbid
-    })
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=persistent)
     pprint(status.json())
     return
 

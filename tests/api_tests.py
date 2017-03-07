@@ -7,7 +7,7 @@ conn = psycopg2.connect('dbname=taralibotdb user=fjcamillo')
 
 cur = conn.cursor()
 
-cur.execute('INSERT INTO chat_chatusers (facebook_id, facebook_image) VALUES (%s, %s)',('firstuser', ' '))
+cur.execute('INSERT INTO chat_conversations (, converse) VALUES (%s, %s)',('firstuser', 'Hello World!'))
 
 conn.commit()
 
