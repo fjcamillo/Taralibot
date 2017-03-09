@@ -6,10 +6,9 @@ from django.http import HttpResponse
 import requests
 from pprint import pprint
 import json
-import os
-import time
+import datetime
 from . import replierfunc
-from . import persistentmenus
+from .persistentmenus import persistentmenu
 
 verify_token = '5244680129'
 
@@ -34,14 +33,27 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                # persistent_menu(message['sender']['id'])
-                # post_facebook_messages(message['sender']['id'], message['message']['text'])
-                location_reply(message['sender']['id'], message)
+                mainmenu = persistentmenu(message['sender']['id'], page_access_token)
+                mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
+                post_facebook_messages(message['sender']['id'], message['message']['text'])
+                # location_reply(message['sender']['id'], message)
         return HttpResponse()
 
 def post_facebook_messages(fbid, received_messages):
+    """
+    :param fbid: Facebook User ID
+    :param received_messages: Message Received Sent by Facebook User ID
+    :return:
+    """
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
-    response_msg = json.dumps({"recipient": {"id":fbid},"message":{"text":received_messages}})
+
+    response_msg = json.dumps(
+        {"recipient":
+             {"id": fbid},
+         "message":
+             {"text": received_messages}
+         })
+
     print('-----')
     print(response_msg)
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
@@ -53,6 +65,11 @@ def receive_postback(fbid):
     return
 
 def location_reply(fbid, received_messages):
+    """
+    :param fbid: Facebook User ID
+    :param received_messages: Message Received Sent by Facebook User ID
+    :return:
+    """
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
     latitude = []
     longitude = []
@@ -61,10 +78,13 @@ def location_reply(fbid, received_messages):
         latitude.append(attach['payload']['coordinates']['lat'])
         longitude.append(attach['payload']['coordinates']['long'])
 
+    response_msg = json.dumps(
+        {'recipient':
+             {'id':fbid},
+         'message':
+             {'text':
+                  "Coordinates: "+str(latitude[0])+","+str(longitude[0])}})
 
-    #Debugging
-    response_msg = json.dumps({'recipient':{'id':fbid},'message':{'text':"Coordinates: "+str(latitude[0])+","+str(longitude[0])}})
-    #Debugging
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
     pprint(status.json())
     return

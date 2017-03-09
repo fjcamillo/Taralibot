@@ -10,6 +10,12 @@ class destinations(models.Model):
     latitude = models.FloatField()
     defaultimage = models.ImageField(null=True)
     owner = models.CharField(max_length=20)
+    description = models.CharField(max_length=500, default='Description')
+    website = models.CharField(max_length=100, default='www.taralibot.xyz')
+    imageUrls = post.JSONField(default="{default: none}")
+    address = models.CharField(max_length=100, default="PUP Sta.Mesa")
+    contact_number = models.CharField(max_length=20, default="0")
+
 
 class services(models.Model):
     destinations_fk = models.ForeignKey(destinations, on_delete=models.CASCADE)
