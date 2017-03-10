@@ -33,11 +33,27 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
+                firstname = getName(message['sender']['id'], page_access_token)['first_name']
                 mainmenu = persistentmenu(message['sender']['id'], page_access_token)
                 mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
-                post_facebook_messages(message['sender']['id'], message['message']['text'])
+                send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
+                    firstname, message['message']['text'])
+                post_facebook_messages(message['sender']['id'], send_message)
                 # location_reply(message['sender']['id'], message)
         return HttpResponse()
+
+def getName(fbid, page_access_token):
+    """
+    Sample Get API Access
+    https://graph.facebook.com/v2.6/<USER_ID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=PAGE_ACCESS_TOKEN
+    :param fbid:
+    :param page_access_token:
+    :return:
+    """
+    post_message_url = 'https://graph.facebook.com/v2.6/'+fbid+'?fields=first_name,last_name&access_token='+page_access_token
+    status = requests.get(post_message_url)
+    pprint(status.json())
+    return status.json()
 
 def post_facebook_messages(fbid, received_messages):
     """

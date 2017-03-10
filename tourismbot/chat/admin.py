@@ -3,7 +3,7 @@ from . import models
 
 # Register your models here.
 class chatusermodel(admin.ModelAdmin):
-    list_display = ['id', 'facebook_id', 'facebook_image']
+    list_display = ['id', 'facebook_id', 'facebook_image', 'facebook_name']
 
     class Meta:
         model = models.chatusers

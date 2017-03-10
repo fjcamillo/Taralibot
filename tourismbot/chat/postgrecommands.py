@@ -12,5 +12,7 @@ class postgrecommands:
 
 
     def insert_conversation(self, fbid, message):
-
         self.cur.execute('INSERT INTO chat_conversations (facebook_fk_id, converse, timestamp) VALUES (%s, %s, %s)',)
+
+    def save_first_name(self, first_name, fbid):
+        self.cur.execute('')
