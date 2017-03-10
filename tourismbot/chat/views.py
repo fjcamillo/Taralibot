@@ -10,6 +10,8 @@ import datetime
 from . import replierfunc
 from .persistentmenus import persistentmenu
 
+
+
 verify_token = '5244680129'
 
 page_access_token = 'EAAIwxSTcnu0BALz1yGvBSgnwXgwEQuv6IVoHmob6VYHni2EqCYSWYdZA3oM9e64tZBbeC5tn94mdvHZAoJzKhwzN9Thj8d3cYHzkSTgsbijEGhhZAh6msbG5i5y1eKX7xq6I3t0QPf8owXKhdbdJZAjLrhvZCoS7ZCHqBTgthRBlwZDZD'
@@ -33,13 +35,14 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                firstname = getName(message['sender']['id'], page_access_token)['first_name']
-                mainmenu = persistentmenu(message['sender']['id'], page_access_token)
-                mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
-                send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
-                    firstname, message['message']['text'])
-                post_facebook_messages(message['sender']['id'], send_message)
-                # location_reply(message['sender']['id'], message)
+                # firstname = getName(message['sender']['id'], page_access_token)['first_name']
+                # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
+                # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
+                # send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
+                #     firstname, message['message']['text'])
+                # post_facebook_messages(message['sender']['id'], send_message)
+                location_reply(message['sender']['id'], message)
+
         return HttpResponse()
 
 def getName(fbid, page_access_token):

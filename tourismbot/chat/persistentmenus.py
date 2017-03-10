@@ -18,27 +18,27 @@ class persistentmenu:
                 {
                     "type": "postback",
                     "title": "Main Menu",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
+                    "payload": "MAIN_MENU"
                 },
                 {
                     "type": "postback",
                     "title": "Get Location",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "GET_LOCATION"
                 },
                 {
                     "type": "postback",
                     "title": "Top Destinations",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "TOP_DESTINATION"
                 },
                 {
                     "type": "postback",
                     "title": "Stories",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "STORIES"
                 },
                 {
                     "type": "postback",
                     "title": "Subscriptions",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "SUBSCRIPTIONS"
                 },
             ],
             "recipient": fbid
@@ -56,27 +56,27 @@ class persistentmenu:
                 {
                     "type": "postback",
                     "title": "Main Menu",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
+                    "payload": "MAIN_MENU"
                 },
                 {
                     "type": "postback",
                     "title": "Get Location",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "GET_LOCATION"
                 },
                 {
                     "type": "postback",
                     "title": "Top Destinations",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "TOP_DESTINATION"
                 },
                 {
                     "type": "postback",
-                    "title": "Blogs",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "title": "Stories",
+                    "payload": "STORIES"
                 },
                 {
                     "type": "postback",
                     "title": "Subscriptions",
-                    "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                    "payload": "SUBSCRIPTIONS"
                 },
             ],
             "recipient": fbid
