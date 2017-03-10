@@ -2,10 +2,13 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Django default" uuid="f5acbc35-393f-4e50-ba2d-aa210df716ef">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="PostgreSQL" version="9.6.2" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <first-sync>true</first-sync>
       <user-name>fjcamillo</user-name>
+      <resolve-scope>taralibotdb:public,fjcamillo</resolve-scope>
     </data-source>
   </component>
 </project>

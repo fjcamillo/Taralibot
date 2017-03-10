@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="dbSrc:///d5d34f02/f5acbc35-393f-4e50-ba2d-aa210df716ef" dialect="PostgreSQL" />
+  </component>
+</project>
