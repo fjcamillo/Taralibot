@@ -9,8 +9,9 @@ class generate:
         self.message = message
         self.page_access_token = page_access_token
 
-    def generichorizontaltemplate(self):
-        post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + self.page_access_token
+    def generichorizontaltemplate(self, fbid, page_access_token):
+        pprint('---Starting generichorizontaltemplate----')
+        post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + page_access_token
 
         # response = {
         #     'recipient': {'id': self.fbid},
@@ -23,7 +24,7 @@ class generate:
         # }
 
         response_msg = {
-            "recipient":{"id": self.fbid},
+
             "message":{
                 "attachment":{
                   "type":"template",
@@ -56,7 +57,8 @@ class generate:
                     ]
                   }
                 }
-              }
+              },
+            "recipient": {"id": fbid}
             }
         pprint(response_msg)
         status = requests.post(post_message_url, headers={"Content-Type" : "application/json"}, data = response_msg)

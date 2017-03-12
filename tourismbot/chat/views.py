@@ -9,7 +9,7 @@ import json
 import datetime
 from . import replierfunc
 from .persistentmenus import persistentmenu
-
+from .generictemplates import generate
 
 
 verify_token = '5244680129'
@@ -35,13 +35,15 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                # firstname = getName(message['sender']['id'], page_access_token)['first_name']
+                gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
+                gen.generichorizontaltemplate(message['sender']['id'], gen.page_access_token)
+                firstname = getName(message['sender']['id'], page_access_token)['first_name']
                 # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
                 # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
-                # send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
-                #     firstname, message['message']['text'])
-                # post_facebook_messages(message['sender']['id'], send_message)
-                location_reply(message['sender']['id'], message)
+                send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
+                    firstname, message['message']['text'])
+                post_facebook_messages(message['sender']['id'], send_message)
+                # location_reply(message['sender']['id'], message)
 
         return HttpResponse()
 
