@@ -11,6 +11,8 @@ import datetime
 # from .persistentmenus import persistentmenu
 # from .generictemplates import generate
 import mainmenu
+import topdestinatons
+import ceamore
 
 verify_token = '5244680129'
 ngrokurl = 'https://5b3b8ef5.ngrok.io'
@@ -45,7 +47,7 @@ class index(generic.View):
                             elif message['postback']['payload']=="GET_LOCATION":
                                 location_button(message['sender']['id'])
                             elif message['postback']['payload'] == "TOP_DESTINATION":
-                                pass
+                                topdestinatons.topdestinations(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "STORIES":
                                 pass
                             elif message['postback']['payload'] == "SUBSCRIPTIONS":
@@ -60,7 +62,27 @@ class index(generic.View):
                                 pass
                             elif message['postback']['payload'] == "BLOG":
                                 pass
-                            elif message['postback']['payload'] == "TOP_DESTINATION":
+                            elif message['postback']['payload'] == "ABOUT_CEA":
+                                ceamore.ceamore(message['sender']['id'], ngrokurl, page_access_token)
+                                mess = "The College of Engineering, formerly known as the College of Engineering and Architecture celebrates its 25th year on the Centenary of PUP. The CEA was acknowledged by many as the University's flagship college. Here are the highlights of the growth of the College from the Faculty of Technology to what and where it is now."
+                                post_facebook_messages(message['sender']['id'], mess)
+                            elif message['postback']['payload'] == "BOOK_CEA":
+                                pass
+                            elif message['postback']['payload'] == "ABOUT_PRINCESSA":
+                                pass
+                            elif message['postback']['payload'] == "BOOK_PRINCESSA":
+                                pass
+                            elif message['postback']['payload'] == "ABOUT_BORACAY":
+                                pass
+                            elif message['postback']['payload'] == "BOOK_BORACAY":
+                                pass
+                            elif message['postback']['payload'] == "ABOUT_NIDO":
+                                pass
+                            elif message['postback']['payload'] == "BOOK_NIDO":
+                                pass
+                            elif message['postback']['payload'] == "ABOUT_GALERA":
+                                pass
+                            elif message['postback']['payload'] == "BOOK_GALERA":
                                 pass
                         if 'message' in message:
                             if 'attachments' in message['message']:
