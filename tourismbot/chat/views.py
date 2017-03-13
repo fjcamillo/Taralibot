@@ -7,15 +7,15 @@ import requests
 from pprint import pprint
 import json
 import datetime
-from . import replierfunc
-from .persistentmenus import persistentmenu
-from .generictemplates import generate
+# from . import replierfunc
+# from .persistentmenus import persistentmenu
+# from .generictemplates import generate
 
 
 verify_token = '5244680129'
-
+ngrokurl = 'https://5b3b8ef5.ngrok.io'
 page_access_token = 'EAAIwxSTcnu0BALz1yGvBSgnwXgwEQuv6IVoHmob6VYHni2EqCYSWYdZA3oM9e64tZBbeC5tn94mdvHZAoJzKhwzN9Thj8d3cYHzkSTgsbijEGhhZAh6msbG5i5y1eKX7xq6I3t0QPf8owXKhdbdJZAjLrhvZCoS7ZCHqBTgthRBlwZDZD'
-
+post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
 class index(generic.View):
 
     def get(self, request, *args, **kwargs):
@@ -33,25 +33,41 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         pprint(incoming_message)
         pprint("\n=============INITIAL JSON RETURN================")
-        for entry in incoming_message['entry']:
-            for message in entry['messaging']:
+        if 'entry' in incoming_message:
+            for entry in incoming_message['entry']:
+                for message in entry['messaging']:
 
-                # gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
-                # gen.generichorizontaltemplate(gen.fbid, gen.page_access_token)
+                    # gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
+                    # gen.generichorizontaltemplate(gen.fbid, gen.page_access_token)
+                    # whitelistdomain(message['sender']['id'], page_access_token)
+                    generichorizontaltemplate(message['sender']['id'], page_access_token)
 
-                generichorizontaltemplate(message['sender']['id'], page_access_token)
+                    firstname = getName(message['sender']['id'], page_access_token)['first_name']
 
-                firstname = getName(message['sender']['id'], page_access_token)['first_name']
+                    # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
+                    # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
 
-                # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
-                # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
-
-                send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
-                    firstname, message['message']['text'])
-                post_facebook_messages(message['sender']['id'], send_message)
-                # location_reply(message['sender']['id'], message)
-
+                    send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
+                        firstname, message['message']['text'])
+                    post_facebook_messages(message['sender']['id'], send_message)
+                    # location_reply(message['sender']['id'], message)
+        else: pass
         return HttpResponse()
+
+def whitelistdomain(fbid, page_access_token):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=' + page_access_token
+    response_message = json.dumps({
+        # "setting_type" : "domain_whitelisting",
+        "whitelisted_domains" : [ngrokurl],
+        # "domain_action_type": "add",
+        "recipient": fbid
+             # {"id": fbid}
+    })
+    print('----')
+    print(response_message)
+    status = requests.post(post_message_url, headers = {'Content-Type'  : 'application/json'}, data=response_message)
+    pprint(status.json())
+    return
 
 
 def location_button(fbid, received_messages):
@@ -98,27 +114,76 @@ def generichorizontaltemplate(fbid, page_access_token):
                     "elements":[
                        {
                         "title":"Welcome to Peter\'s Hats",
-                        "image_url":"https://petersfancybrownhats.com/company_image.png",
+                        "image_url":ngrokurl+"/media/1.jpg",
                         "subtitle":"We\'ve got the right hat for everyone.",
                         "default_action": {
                           "type": "web_url",
-                          "url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
+                          "url": ngrokurl,
                           "messenger_extensions": True,
                           "webview_height_ratio": "tall",
-                          "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                          "fallback_url": ngrokurl
                         },
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url":"https://petersfancybrownhats.com",
+                            "url":ngrokurl,
                             "title":"View Website"
                           },{
                             "type":"postback",
                             "title":"Start Chatting",
                             "payload":"DEVELOPER_DEFINED_PAYLOAD"
-                          }
+                          },
+
                         ]
-                      }
+                      },
+                        {
+                            "title": "Welcome to Peter\'s Hats",
+                            "image_url": ngrokurl + "/media/1.jpg",
+                            "subtitle": "We\'ve got the right hat for everyone.",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": ngrokurl,
+                                "messenger_extensions": True,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": ngrokurl
+                            },
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "url": ngrokurl,
+                                    "title": "View Website"
+                                }, {
+                                    "type": "postback",
+                                    "title": "Start Chatting",
+                                    "payload": "DEVELOPER_DEFINED_PAYLOAD"
+                                },
+
+                            ]
+                        },
+                        {
+                            "title": "Welcome to Peter\'s Hats",
+                            "image_url": ngrokurl + "/media/1.jpg",
+                            "subtitle": "We\'ve got the right hat for everyone.",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": ngrokurl,
+                                "messenger_extensions": True,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": ngrokurl
+                            },
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "url": ngrokurl,
+                                    "title": "View Website"
+                                }, {
+                                    "type": "postback",
+                                    "title": "Start Chatting",
+                                    "payload": "DEVELOPER_DEFINED_PAYLOAD"
+                                },
+
+                            ]
+                        }
                     ]
                   }
                 }
