@@ -10,12 +10,14 @@ import datetime
 # from . import replierfunc
 # from .persistentmenus import persistentmenu
 # from .generictemplates import generate
-
+import mainmenu
 
 verify_token = '5244680129'
 ngrokurl = 'https://5b3b8ef5.ngrok.io'
+
 page_access_token = 'EAAIwxSTcnu0BALz1yGvBSgnwXgwEQuv6IVoHmob6VYHni2EqCYSWYdZA3oM9e64tZBbeC5tn94mdvHZAoJzKhwzN9Thj8d3cYHzkSTgsbijEGhhZAh6msbG5i5y1eKX7xq6I3t0QPf8owXKhdbdJZAjLrhvZCoS7ZCHqBTgthRBlwZDZD'
 post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
+
 class index(generic.View):
 
     def get(self, request, *args, **kwargs):
@@ -35,55 +37,76 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         if 'entry' in incoming_message:
             for entry in incoming_message['entry']:
-                for message in entry['messaging']:
+                if 'messaging' in entry:
+                    for message in entry['messaging']:
+                        if 'postback' in message:
+                            if message['postback']['payload']=='MAIN_MENU':
+                                mainmenu.mainmenu(message['sender']['id'],ngrokurl, page_access_token)
+                            elif message['postback']['payload']=="GET_LOCATION":
+                                location_button(message['sender']['id'])
+                            elif message['postback']['payload'] == "TOP_DESTINATION":
+                                pass
+                            elif message['postback']['payload'] == "STORIES":
+                                pass
+                            elif message['postback']['payload'] == "SUBSCRIPTIONS":
+                                pass
+                            elif message['postback']['payload'] == "ABOUT_US":
+                                pass
+                            elif message['postback']['payload'] == "SHOW_BEST":
+                                pass
+                            elif message['postback']['payload'] == "SUBSCRIBE":
+                                pass
+                            elif message['postback']['payload'] == "SHOW_HEADLINES":
+                                pass
+                            elif message['postback']['payload'] == "BLOG":
+                                pass
+                            elif message['postback']['payload'] == "TOP_DESTINATION":
+                                pass
+                        if 'message' in message:
+                            if 'attachments' in message['message']:
+                                for attach in message['message']['attachments']:
+                                    lat = attach['payload']['coordinates']['lat']
+                                    long = attach['payload']['coordinates']['long']
+                                    reply = 'lat: {}, long: {}'.format(lat, long)
+                                    post_facebook_messages(message['sender']['id'], reply)
 
-                    # gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
-                    # gen.generichorizontaltemplate(gen.fbid, gen.page_access_token)
-                    # whitelistdomain(message['sender']['id'], page_access_token)
-                    generichorizontaltemplate(message['sender']['id'], page_access_token)
 
-                    firstname = getName(message['sender']['id'], page_access_token)['first_name']
+                        # gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
+                        # gen.generichorizontaltemplate(gen.fbid, gen.page_access_token)
+                        # whitelistdomain(message['sender']['id'], page_access_token)
+                        # generichorizontaltemplate(message['sender']['id'], page_access_token)
+                        #
+                        # firstname = getName(message['sender']['id'], page_access_token)['first_name']
 
-                    # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
-                    # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
+                        # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
+                        # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
 
-                    send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
-                        firstname, message['message']['text'])
-                    post_facebook_messages(message['sender']['id'], send_message)
-                    # location_reply(message['sender']['id'], message)
+                        # send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
+                        #     firstname, message['message']['text'])
+                        # post_facebook_messages(message['sender']['id'], send_message)
+                        # location_reply(message['sender']['id'], message)
+                # elif ''
         else: pass
         return HttpResponse()
 
-def whitelistdomain(fbid, page_access_token):
-    post_message_url = 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=' + page_access_token
-    response_message = json.dumps({
-        # "setting_type" : "domain_whitelisting",
-        "whitelisted_domains" : [ngrokurl],
-        # "domain_action_type": "add",
-        "recipient": fbid
-             # {"id": fbid}
-    })
-    print('----')
-    print(response_message)
-    status = requests.post(post_message_url, headers = {'Content-Type'  : 'application/json'}, data=response_message)
-    pprint(status.json())
-    return
-
-
-def location_button(fbid, received_messages):
+def location_button(fbid):
     """
     :param fbid: Facebook User ID
     :param received_messages: Message Received Sent by Facebook User ID
     :return:
     """
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
-
     response_msg = json.dumps(
-        {"recipient":
-             {"id": fbid},
-         "message":
-             {"text": received_messages}
-         })
+        {"recipient": {"id": fbid},
+        "message": {
+            "text": "Please share the location you want to search:",
+            "quick_replies": [
+                {
+                    "content_type": "location",
+                }
+                ]
+            }
+        })
 
     print('-----')
     print(response_msg)
