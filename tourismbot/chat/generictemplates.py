@@ -23,8 +23,8 @@ class generate:
         #     }
         # }
 
-        response_msg = {
-
+        response_msg = json.dumps({
+            "recipient": {"id": fbid},
             "message":{
                 "attachment":{
                   "type":"template",
@@ -58,8 +58,7 @@ class generate:
                   }
                 }
               },
-            "recipient": {"id": fbid}
-            }
+            })
         pprint(response_msg)
         status = requests.post(post_message_url, headers={"Content-Type" : "application/json"}, data = response_msg)
         pprint(status.json())

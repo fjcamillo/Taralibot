@@ -35,17 +35,100 @@ class index(generic.View):
         pprint("\n=============INITIAL JSON RETURN================")
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
-                gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
-                gen.generichorizontaltemplate(message['sender']['id'], gen.page_access_token)
+
+                # gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
+                # gen.generichorizontaltemplate(gen.fbid, gen.page_access_token)
+
+                generichorizontaltemplate(message['sender']['id'], page_access_token)
+
                 firstname = getName(message['sender']['id'], page_access_token)['first_name']
+
                 # mainmenu = persistentmenu(message['sender']['id'], page_access_token)
                 # mainmenu.persistent_mainmenu(mainmenu.fbid, mainmenu.page_access_token)
+
                 send_message = "Hi {}, Thank You, for trying out TaraliBot. I will now echo your message: {}".format(
                     firstname, message['message']['text'])
                 post_facebook_messages(message['sender']['id'], send_message)
                 # location_reply(message['sender']['id'], message)
 
         return HttpResponse()
+
+
+def location_button(fbid, received_messages):
+    """
+    :param fbid: Facebook User ID
+    :param received_messages: Message Received Sent by Facebook User ID
+    :return:
+    """
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
+
+    response_msg = json.dumps(
+        {"recipient":
+             {"id": fbid},
+         "message":
+             {"text": received_messages}
+         })
+
+    print('-----')
+    print(response_msg)
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
+    pprint(status.json())
+    return
+
+def generichorizontaltemplate(fbid, page_access_token):
+    pprint('---Starting generichorizontaltemplate----')
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + page_access_token
+    # response = {
+    #     'recipient': {'id': self.fbid},
+    #     'message':{
+    #         'attachment':{
+    #             'type':'template',
+    #             'payload':
+    #         }
+    #     }
+    # }
+
+    response_msg = json.dumps({
+            "recipient": {"id": fbid},
+            "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                       {
+                        "title":"Welcome to Peter\'s Hats",
+                        "image_url":"https://petersfancybrownhats.com/company_image.png",
+                        "subtitle":"We\'ve got the right hat for everyone.",
+                        "default_action": {
+                          "type": "web_url",
+                          "url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
+                          "messenger_extensions": True,
+                          "webview_height_ratio": "tall",
+                          "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                        },
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://petersfancybrownhats.com",
+                            "title":"View Website"
+                          },{
+                            "type":"postback",
+                            "title":"Start Chatting",
+                            "payload":"DEVELOPER_DEFINED_PAYLOAD"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            })
+    pprint(response_msg)
+    status = requests.post(post_message_url, headers={"Content-Type" : "application/json"}, data = response_msg)
+    pprint(status.json())
+    return
+
 
 def getName(fbid, page_access_token):
     """

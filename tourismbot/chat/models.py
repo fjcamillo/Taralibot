@@ -10,7 +10,7 @@ class destinations(models.Model):
     latitude = models.FloatField()
     defaultimage = models.ImageField(null=True)
     owner = models.CharField(max_length=20)
-    description = models.CharField(max_length=500, default='Description')
+    description = models.CharField(max_length=1000, default='Description')
     website = models.CharField(max_length=100, default='www.taralibot.xyz')
     imageUrls = post.JSONField(default="{default: none}")
     image_one = models.ImageField(null=True)
