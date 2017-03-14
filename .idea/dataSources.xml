@@ -18,5 +18,13 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="db" uuid="3a62d679-4a88-4fc4-ae3d-f23ac14e42f0">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>SQLite</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../cozyna/cozyna/db.sqlite3</jdbc-url>
+    </data-source>
   </component>
 </project>

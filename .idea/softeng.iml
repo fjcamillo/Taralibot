@@ -20,6 +20,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="cozyna" />
+    <orderEntry type="module" module-name="tensorflow_chatbot-master" />
+    <orderEntry type="module" module-name="Myriad" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

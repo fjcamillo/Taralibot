@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Myriad/.idea/Myriad.iml" filepath="$PROJECT_DIR$/../Myriad/.idea/Myriad.iml" />
       <module fileurl="file://$PROJECT_DIR$/../cozyna/.idea/cozyna.iml" filepath="$PROJECT_DIR$/../cozyna/.idea/cozyna.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/softeng.iml" filepath="$PROJECT_DIR$/.idea/softeng.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tensorflow_chatbot-master/.idea/tensorflow_chatbot-master.iml" filepath="$PROJECT_DIR$/../tensorflow_chatbot-master/.idea/tensorflow_chatbot-master.iml" />
     </modules>
   </component>
 </project>

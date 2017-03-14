@@ -10,5 +10,8 @@
       <user-name>fjcamillo</user-name>
       <resolve-scope>taralibotdb:fjcamillo,public</resolve-scope>
     </data-source>
+    <data-source name="db" uuid="3a62d679-4a88-4fc4-ae3d-f23ac14e42f0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
   </component>
 </project>

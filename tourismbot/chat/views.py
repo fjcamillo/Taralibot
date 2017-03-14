@@ -13,12 +13,30 @@ import datetime
 import mainmenu
 import topdestinatons
 import ceamore
+import princessamore
+import galeramore
+import elnidomore
+import boracaymore
+
 
 verify_token = '5244680129'
 ngrokurl = 'https://5b3b8ef5.ngrok.io'
 
 page_access_token = 'EAAIwxSTcnu0BALz1yGvBSgnwXgwEQuv6IVoHmob6VYHni2EqCYSWYdZA3oM9e64tZBbeC5tn94mdvHZAoJzKhwzN9Thj8d3cYHzkSTgsbijEGhhZAh6msbG5i5y1eKX7xq6I3t0QPf8owXKhdbdJZAjLrhvZCoS7ZCHqBTgthRBlwZDZD'
 post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
+
+smess = [
+"The College of Engineering, formerly known as the College of Engineering and Architecture celebrates its 25th year on the Centenary of PUP. The CEA was acknowledged by many as the University's flagship college. Here are the highlights of the growth of the College from the Faculty of Technology to what and where it is now.",
+
+"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved.",
+
+"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved.",
+
+"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved.",
+
+"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved."
+
+]
 
 class index(generic.View):
 
@@ -64,24 +82,33 @@ class index(generic.View):
                                 pass
                             elif message['postback']['payload'] == "ABOUT_CEA":
                                 ceamore.ceamore(message['sender']['id'], ngrokurl, page_access_token)
-                                mess = "The College of Engineering, formerly known as the College of Engineering and Architecture celebrates its 25th year on the Centenary of PUP. The CEA was acknowledged by many as the University's flagship college. Here are the highlights of the growth of the College from the Faculty of Technology to what and where it is now."
+                                mess = smess[0]
                                 post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_CEA":
                                 pass
                             elif message['postback']['payload'] == "ABOUT_PRINCESSA":
-                                pass
+                                princessamore.princessamore(message['sender']['id'], ngrokurl, page_access_token)
+                                mess = smess[1]
+                                post_facebook_messages(message['sender']['id'], mess)
+
                             elif message['postback']['payload'] == "BOOK_PRINCESSA":
                                 pass
                             elif message['postback']['payload'] == "ABOUT_BORACAY":
-                                pass
+                                boracaymore.boracaymore(message['sender']['id'], ngrokurl, page_access_token)
+                                mess = smess[2]
+                                post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_BORACAY":
                                 pass
                             elif message['postback']['payload'] == "ABOUT_NIDO":
-                                pass
+                                elnidomore.elnidomore(message['sender']['id'], ngrokurl, page_access_token)
+                                mess = smess[3]
+                                post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_NIDO":
                                 pass
                             elif message['postback']['payload'] == "ABOUT_GALERA":
-                                pass
+                                galeramore.galeramore(message['sender']['id'], ngrokurl, page_access_token)
+                                mess = smess[4]
+                                post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_GALERA":
                                 pass
                         if 'message' in message:
