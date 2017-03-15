@@ -16,7 +16,7 @@ def boracaymore(fbid, ngrokurl, page_access_token):
                     "elements":[
                        {
                         "title":"Boracay",
-                        "image_url":ngrokurl+"/media/1_KHX56ZQ.jpg",
+                        "image_url":ngrokurl+"/media/2_vDusXpE.jpg",
                         "subtitle":"Here lies the greatest beach of all time",
                         "default_action": {
                           "type": "web_url",
@@ -41,7 +41,7 @@ def boracaymore(fbid, ngrokurl, page_access_token):
 
                         {
                             "title": "Boracay",
-                            "image_url": ngrokurl + "/media/2_BACb51O.jpg",
+                            "image_url": ngrokurl + "/media/3_zLPCdDy.jpg",
                             "subtitle": "Here lies the greatest beach of all time",
                             "default_action": {
                                 "type": "web_url",
@@ -65,32 +65,7 @@ def boracaymore(fbid, ngrokurl, page_access_token):
                         },
                         {
                             "title": "Boracay",
-                            "image_url": ngrokurl + "/media/3_0ULWlC3.jpg",
-                            "subtitle": "Here lies the greatest beach of all time",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": ngrokurl,
-                                "messenger_extensions": True,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": ngrokurl
-                            },
-                            "buttons": [
-                                {
-                                    "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_BORACAY"
-                                }, {
-                                    "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_BORACAY"
-                                },
-
-                            ]
-                        },
-
-                        {
-                            "title": "Boracay",
-                            "image_url": ngrokurl + "/media/4_S9b7zS2.jpg",
+                            "image_url": ngrokurl + "/media/4_L7DBtb1.jpg",
                             "subtitle": "Here lies the greatest beach of all time",
                             "default_action": {
                                 "type": "web_url",
@@ -115,7 +90,32 @@ def boracaymore(fbid, ngrokurl, page_access_token):
 
                         {
                             "title": "Boracay",
-                            "image_url": ngrokurl + "/media/5_j4KV3Zt.jpg",
+                            "image_url": ngrokurl + "/media/5_BUi6R7J.jpg",
+                            "subtitle": "Here lies the greatest beach of all time",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": ngrokurl,
+                                "messenger_extensions": True,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": ngrokurl
+                            },
+                            "buttons": [
+                                {
+                                    "type":"postback",
+                            "title":"LEARN MORE",
+                            "payload":"ABOUT_BORACAY"
+                                }, {
+                                    "type":"postback",
+                            "title":"BOOK NOW",
+                            "payload":"BOOK_BORACAY"
+                                },
+
+                            ]
+                        },
+
+                        {
+                            "title": "Boracay",
+                            "image_url": ngrokurl + "/media/5_BUi6R7J.jpg",
                             "subtitle": "Here lies the greatest beach of all time",
                             "default_action": {
                                 "type": "web_url",

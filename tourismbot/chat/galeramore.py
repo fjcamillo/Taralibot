@@ -16,7 +16,7 @@ def galeramore(fbid, ngrokurl, page_access_token):
                     "elements":[
                        {
                         "title":"Puerto Galera",
-                        "image_url":ngrokurl+"/media/1_KHX56ZQ.jpg",
+                        "image_url":ngrokurl+"/media/1_W2v7gDP.jpg",
                         "subtitle":"Here lives the greatest puerto of them all",
                         "default_action": {
                           "type": "web_url",
@@ -41,7 +41,7 @@ def galeramore(fbid, ngrokurl, page_access_token):
 
                         {
                             "title": "Puerto Galera",
-                            "image_url": ngrokurl + "/media/2_BACb51O.jpg",
+                            "image_url": ngrokurl + "/media/2.jpg",
                             "subtitle": "Here lives the greatest puerto of them all",
                             "default_action": {
                                 "type": "web_url",
@@ -65,32 +65,7 @@ def galeramore(fbid, ngrokurl, page_access_token):
                         },
                         {
                             "title": "Puerto Galera",
-                            "image_url": ngrokurl + "/media/3_0ULWlC3.jpg",
-                            "subtitle": "Here lives the greatest puerto of them all",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": ngrokurl,
-                                "messenger_extensions": True,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": ngrokurl
-                            },
-                            "buttons": [
-                                {
-                                    "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_GALERA"
-                                }, {
-                                    "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_GALERA"
-                                },
-
-                            ]
-                        },
-
-                        {
-                            "title": "Puerto Galera",
-                            "image_url": ngrokurl + "/media/4_S9b7zS2.jpg",
+                            "image_url": ngrokurl + "/media/3.jpg",
                             "subtitle": "Here lives the greatest puerto of them all",
                             "default_action": {
                                 "type": "web_url",
@@ -115,7 +90,32 @@ def galeramore(fbid, ngrokurl, page_access_token):
 
                         {
                             "title": "Puerto Galera",
-                            "image_url": ngrokurl + "/media/5_j4KV3Zt.jpg",
+                            "image_url": ngrokurl + "/media/4.jpg",
+                            "subtitle": "Here lives the greatest puerto of them all",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": ngrokurl,
+                                "messenger_extensions": True,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": ngrokurl
+                            },
+                            "buttons": [
+                                {
+                                    "type":"postback",
+                            "title":"LEARN MORE",
+                            "payload":"ABOUT_GALERA"
+                                }, {
+                                    "type":"postback",
+                            "title":"BOOK NOW",
+                            "payload":"BOOK_GALERA"
+                                },
+
+                            ]
+                        },
+
+                        {
+                            "title": "Puerto Galera",
+                            "image_url": ngrokurl + "/media/5.jpg",
                             "subtitle": "Here lives the greatest puerto of them all",
                             "default_action": {
                                 "type": "web_url",

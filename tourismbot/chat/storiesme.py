@@ -2,7 +2,7 @@ import json
 import requests
 from pprint import pprint
 
-def princessamore(fbid, ngrokurl, page_access_token):
+def storiesme(fbid, ngrokurl, page_access_token):
     pprint('---Starting generichorizontaltemplate----')
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + page_access_token
 
@@ -15,9 +15,9 @@ def princessamore(fbid, ngrokurl, page_access_token):
                     "template_type":"generic",
                     "elements":[
                        {
-                        "title":"Puerto Princessa",
-                        "image_url":ngrokurl+"/media/5_w4aqsMG.jpg",
-                        "subtitle":"Find great spots here at Puerto Princessa",
+                        "title":"College of Engineering",
+                        "image_url":ngrokurl+"/media/1_iZey8Q8.jpg",
+                        "subtitle":"Here lies the great computer engineering students",
                         "default_action": {
                           "type": "web_url",
                           "url": ngrokurl,
@@ -28,45 +28,16 @@ def princessamore(fbid, ngrokurl, page_access_token):
                         "buttons":[
                           {
                             "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_PRINCESSA"
-                          },{
-                            "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_PRINCESSA"
+                            "title":"READ OUR STORIES",
+                            "payload":"ABOUT_CEA"
                           },
-
                         ]
                       },
 
                         {
                             "title": "Puerto Princessa",
-                            "image_url": ngrokurl + "/media/4_epO6Ae1.jpg",
-                            "subtitle": "Find great spots here at Puerto Princessa",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": ngrokurl,
-                                "messenger_extensions": True,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": ngrokurl
-                            },
-                            "buttons": [
-                                {
-                                    "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_PRINCESSA"
-                                }, {
-                                    "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_PRINCESSA"
-                                },
-
-                            ]
-                        },
-                        {
-                            "title": "Puerto Princessa",
                             "image_url": ngrokurl + "/media/3.JPG",
-                            "subtitle": "Find great spots here at Puerto Princessa",
+                            "subtitle": "Paddling through the navigable portion of the 8.2-kilometer Underground River",
                             "default_action": {
                                 "type": "web_url",
                                 "url": ngrokurl,
@@ -77,21 +48,37 @@ def princessamore(fbid, ngrokurl, page_access_token):
                             "buttons": [
                                 {
                                     "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_PRINCESSA"
-                                }, {
+                                    "title":"READ OUR STORIES",
+                                    "payload":"ABOUT_PRINCESSA"
+                                },
+
+                            ]
+                        },
+                        {
+                            "title": "Boracay",
+                            "image_url": ngrokurl + "/media/4_FIsSF25.jpg",
+                            "subtitle": "Our mission is to connect tourists and businesses to Boracay Island",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": ngrokurl,
+                                "messenger_extensions": True,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": ngrokurl
+                            },
+                            "buttons": [
+                                {
                                     "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_PRINCESSA"
+                                    "title":"READ OUR STORIES",
+                                    "payload":"ABOUT_BORACAY"
                                 },
 
                             ]
                         },
 
                         {
-                            "title": "Puerto Princessa",
-                            "image_url": ngrokurl + "/media/2_TxYDipl.jpg",
-                            "subtitle": "Find great spots here at Puerto Princessa",
+                            "title": "El Nido",
+                            "image_url": ngrokurl + "/media/1_vbuum73.jpg",
+                            "subtitle": "It is a Philippine municipality on Palawan. Famous for its white-sand beaches",
                             "default_action": {
                                 "type": "web_url",
                                 "url": ngrokurl,
@@ -102,21 +89,17 @@ def princessamore(fbid, ngrokurl, page_access_token):
                             "buttons": [
                                 {
                                     "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_PRINCESSA"
-                                }, {
-                                    "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_PRINCESSA"
+                                    "title":"READ OUR STORIES",
+                                    "payload":"ABOUT_NIDO"
                                 },
 
                             ]
                         },
 
                         {
-                            "title": "Puerto Princessa",
-                            "image_url": ngrokurl + "/media/1_Pe62Xa8.png",
-                            "subtitle": "Find great spots here at Puerto Princessa",
+                            "title": "Puerto Galera",
+                            "image_url": ngrokurl + "/media/1.jpg",
+                            "subtitle": "Puerto Galera is a soothing vision of shimmering seas surrounded by lush mountains.",
                             "default_action": {
                                 "type": "web_url",
                                 "url": ngrokurl,
@@ -127,12 +110,8 @@ def princessamore(fbid, ngrokurl, page_access_token):
                             "buttons": [
                                 {
                                     "type":"postback",
-                            "title":"LEARN MORE",
-                            "payload":"ABOUT_PRINCESSA"
-                                }, {
-                                    "type":"postback",
-                            "title":"BOOK NOW",
-                            "payload":"BOOK_PRINCESSA"
+                                    "title":"READ OUR STORIES",
+                                    "payload":"ABOUT_GALERA"
                                 },
 
                             ]

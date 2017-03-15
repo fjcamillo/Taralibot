@@ -17,10 +17,22 @@ import princessamore
 import galeramore
 import elnidomore
 import boracaymore
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+import numpy as np
+import classifier
+import storiesme
+import bookreceipt
+import flight
 
+count_vec = CountVectorizer()
+normalized_text = TfidfTransformer()
 
 verify_token = '5244680129'
-ngrokurl = 'https://5b3b8ef5.ngrok.io'
+ngrokurl = 'https://3a5b64d1.ngrok.io'
 
 page_access_token = 'EAAIwxSTcnu0BALz1yGvBSgnwXgwEQuv6IVoHmob6VYHni2EqCYSWYdZA3oM9e64tZBbeC5tn94mdvHZAoJzKhwzN9Thj8d3cYHzkSTgsbijEGhhZAh6msbG5i5y1eKX7xq6I3t0QPf8owXKhdbdJZAjLrhvZCoS7ZCHqBTgthRBlwZDZD'
 post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token
@@ -30,11 +42,11 @@ smess = [
 
 "PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved.",
 
-"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved.",
+"Our mission is to connect tourists and businesses to Boracay Island to share this unique world class fine white sand beach experience to the rest of the world.",
 
-"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved.",
+"El Nido is a Philippine municipality on Palawan island. Its known for its whitesand beaches, coral reefs and as the gateway to the Bacuit archipelago, a group of islands with steep karst cliffs.",
 
-"PUERTO PRINCESA Paddling through the navigable portion of the 8.2 kilometer Underground River is a journey through time its karstic chambers serve as a natural canvas on which vignettes of the past are geologically preserved."
+"Puerto Galera is a soothing vision of shimmering seas surrounded by lush mountains. It is considered one of the most beautiful and developed beach resort community in the country"
 
 ]
 
@@ -67,50 +79,50 @@ class index(generic.View):
                             elif message['postback']['payload'] == "TOP_DESTINATION":
                                 topdestinatons.topdestinations(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "STORIES":
-                                pass
+                                storiesme.storiesme(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "SUBSCRIPTIONS":
                                 pass
                             elif message['postback']['payload'] == "ABOUT_US":
                                 pass
                             elif message['postback']['payload'] == "SHOW_BEST":
-                                pass
+                                topdestinatons.topdestinations(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "SUBSCRIBE":
                                 pass
                             elif message['postback']['payload'] == "SHOW_HEADLINES":
-                                pass
+                                storiesme.storiesme(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "BLOG":
-                                pass
+                                storiesme.storiesme(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "ABOUT_CEA":
                                 ceamore.ceamore(message['sender']['id'], ngrokurl, page_access_token)
                                 mess = smess[0]
                                 post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_CEA":
-                                pass
+                                flight.flight(message['sender']['id'], ngrokurl, page_access_token)
+                                bookreceipt.bookreceipt(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "ABOUT_PRINCESSA":
                                 princessamore.princessamore(message['sender']['id'], ngrokurl, page_access_token)
                                 mess = smess[1]
                                 post_facebook_messages(message['sender']['id'], mess)
-
                             elif message['postback']['payload'] == "BOOK_PRINCESSA":
-                                pass
+                                bookreceipt.bookreceipt(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "ABOUT_BORACAY":
                                 boracaymore.boracaymore(message['sender']['id'], ngrokurl, page_access_token)
                                 mess = smess[2]
                                 post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_BORACAY":
-                                pass
+                                bookreceipt.bookreceipt(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "ABOUT_NIDO":
                                 elnidomore.elnidomore(message['sender']['id'], ngrokurl, page_access_token)
                                 mess = smess[3]
                                 post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_NIDO":
-                                pass
+                                bookreceipt.bookreceipt(message['sender']['id'], ngrokurl, page_access_token)
                             elif message['postback']['payload'] == "ABOUT_GALERA":
                                 galeramore.galeramore(message['sender']['id'], ngrokurl, page_access_token)
                                 mess = smess[4]
                                 post_facebook_messages(message['sender']['id'], mess)
                             elif message['postback']['payload'] == "BOOK_GALERA":
-                                pass
+                                bookreceipt.bookreceipt(message['sender']['id'], ngrokurl, page_access_token)
                         if 'message' in message:
                             if 'attachments' in message['message']:
                                 for attach in message['message']['attachments']:
@@ -118,7 +130,10 @@ class index(generic.View):
                                     long = attach['payload']['coordinates']['long']
                                     reply = 'lat: {}, long: {}'.format(lat, long)
                                     post_facebook_messages(message['sender']['id'], reply)
-
+                            if 'text' in message['message']:
+                                # for tex in m
+                                chatbot(message['message']['text'], message['sender']['id'], classifier.getTrainSet(), classifier.getLabels(), False)
+                                pass
 
                         # gen = generate(fbid=message['sender']['id'], page_access_token=page_access_token)
                         # gen.generichorizontaltemplate(gen.fbid, gen.page_access_token)
@@ -328,4 +343,23 @@ def location_reply(fbid, received_messages):
 
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
     pprint(status.json())
+    return
+
+def chatbot(predict_message, sender_id, training_Set, labels, verbose):
+    if verbose==True:
+        print("\n----Entered Chatbot-----\n")
+
+    #Created a model to fit the training_set
+    trained = count_vec.fit_transform(training_Set)
+
+    #Normalizing the trained model
+    normal = normalized_text.fit_transform(trained)
+
+    #Created a Random Forest Classifer and fitted the normal and labels dataset
+    clf = RandomForestClassifier().fit(normal, labels)
+    docs_new = [predict_message]
+    X_new_counts = count_vec.transform(docs_new)
+    X_new_tfidf = normalized_text.transform(X_new_counts)
+    x = clf.predict(X_new_tfidf)
+    post_facebook_messages(sender_id,str(x[0]))
     return
