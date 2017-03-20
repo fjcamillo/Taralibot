@@ -22,7 +22,8 @@
     <orderEntry type="module" module-name="cozyna" />
     <orderEntry type="module" module-name="tensorflow_chatbot-master" />
     <orderEntry type="module" module-name="Myriad" />
-    <orderEntry type="module" module-name="Bluemix-Romeo" />
+    <orderEntry type="module" module-name="practice" />
+    <orderEntry type="module" module-name="SFear" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

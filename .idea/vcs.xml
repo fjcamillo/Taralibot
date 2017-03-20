@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../SFear" vcs="Git" />
     <mapping directory="$USER_HOME$/Documents/Hackathon/UHAC: 3.0/Bluemix-Romeo" vcs="Git" />
+    <mapping directory="$USER_HOME$/Documents/Python Study/Tensorflow Study" vcs="Git" />
   </component>
 </project>
